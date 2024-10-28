@@ -1,0 +1,2 @@
+if (Temperatura es Fresco and Presion es Baja) then Combustible es PM
+if (Temperatura es Fresco and Presion es Normal) then Combustible es ZR

@@ -1,0 +1,28 @@
+# Variable: Temperatura
+Rango: 110,330
+Conjuntos:
+Frio: 110, 110, 170
+Fresco: 150, 170, 220
+Normal: 170, 220, 270
+Tibio: 220, 270, 290
+Caliente: 270, 330, 330
+
+# Variable: Presion
+Rango: 10,230
+Conjuntos:
+Debil: 10, 10, 70
+Baja: 60, 90, 120
+Normal: 70, 120, 170
+Fuerte: 120, 170, 210
+Alta: 170, 230, 230
+
+# Variable: Combustible
+Rango: -60,60
+Conjuntos:
+NA: -60, -60, -30
+NM: -45, -30, -10
+NB: -30, -10, 5
+ZR: -5, 0, 5
+PB: -5, 5, 30
+PM: 5, 30, 45
+PA: 30, 60, 60
