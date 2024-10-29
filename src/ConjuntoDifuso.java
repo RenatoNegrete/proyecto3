@@ -4,10 +4,11 @@ import java.util.List;
 import java.util.Map;
 
 public class ConjuntoDifuso {
-    private String nombre;
+    private String nombre; // Nombre del conjunto
     private List<Double> parametros; // Puntos que definen la forma de la función de pertenencia
-    private HashMap<Double, Double> valoresCalculados;
+    private HashMap<Double, Double> valoresCalculados; // Mapa con los valores calculados
 
+    // Constructor
     public ConjuntoDifuso(String nombre) {
         this.nombre = nombre;
         this.parametros = new ArrayList<>();
@@ -27,6 +28,7 @@ public class ConjuntoDifuso {
         return;
     }
 
+    // Funcion para modifica un conjunto a partir de una linea de texto
     public void fromLine(String line) {
         // Ejemplo de línea: "Frío: 0, 0, 20"
         String[] parts = line.split(":");
@@ -42,6 +44,7 @@ public class ConjuntoDifuso {
         }
     }
 
+    // Funcion para crear un conjunto a partir de una linea de texto
     public static ConjuntoDifuso obtenerConjunto(String line) {
         // Ejemplo de línea: "Frío: 0, 0, 20"
         String[] parts = line.split(":");
@@ -51,22 +54,30 @@ public class ConjuntoDifuso {
         for (int i = 0; i < paramStrs.length; i++) {
             parametros[i] = Double.parseDouble(paramStrs[i]);
         }
+        // Crear el conjunto con su nombre
         ConjuntoDifuso conjunto = new ConjuntoDifuso(nombre);
+        // Añadir los parametros a la lista de parametros
         for(double n : parametros) {
             conjunto.addParametro(n);
         }
         return conjunto;
     }
 
+    // Funcion para calcular el grado de pertenencia
     public double calcularPertenencia(double valor) {
+        // Si hay tres parametros es una funcion triangular y si hay cuatro en una trapezoidal
         if (parametros.size() == 3) { // Triangular
+            // Obtener los valores de los parametros
             double a = parametros.get(0), b = parametros.get(1), c = parametros.get(2);
+            // Verificar que caso de la funcion cumple y hacer el calculo correspondiente
             if (valor <= a || valor >= c) return 0.0;
             else if (valor == b) return 1.0;
             else if (valor > a && valor < b) return (valor - a) / (b - a);
             else return (c - valor) / (c - b);
         } else if (parametros.size() == 4) { // Trapezoidal
+            // Obtener los valores de os parametros
             double a = parametros.get(0), b = parametros.get(1), c = parametros.get(2), d = parametros.get(3);
+            // Verificar que caso de la funcion cumple y hacer el calculo correspondiente
             if (valor <= a || valor >= d) return 0.0;
             else if (valor >= b && valor <= c) return 1.0;
             else if (valor > a && valor < b) return (valor - a) / (b - a);
@@ -75,6 +86,7 @@ public class ConjuntoDifuso {
         return 0.0;
     }
 
+    // Funcion para colocar un grado de pertenencia ya calculado en el mapa de valores calculados
     public void setGradoPertenencia(double id, double grado) {
         valoresCalculados.put(id, grado); // Almacena el grado en el mapa
     }
@@ -83,12 +95,14 @@ public class ConjuntoDifuso {
         return valoresCalculados;
     }
 
+    // Funcion para calcular el centroide del conjunto
     public double getCentroide() {
+        // Si hay tres parametros se usa la funcion triagular si hay cuatro la trapezoidal
         if (parametros.size() == 3) { // Triangular
-            // En una función triangular, el centroide es el segundo parámetro (b)
+            // El centroide es el segundo parámetro (b)
             return parametros.get(1);
         } else if (parametros.size() == 4) { // Trapezoidal
-            // En una función trapezoidal, el centroide se calcula como el promedio ponderado de las áreas
+            // El centroide se calcula como el promedio ponderado de las áreas
             double a = parametros.get(0), b = parametros.get(1), c = parametros.get(2), d = parametros.get(3);
 
             // Altura del trapezoide en la zona de 1.0
@@ -102,9 +116,10 @@ public class ConjuntoDifuso {
 
             return centroide;
         }
-        return 0.0; // Para conjuntos con otros tipos de forma (si existieran)
+        return 0.0;
     }
 
+    // Funcion que contruye un string para poder imprimir un conjnto difuso
     public StringBuilder print() {
         StringBuilder str = new StringBuilder();
         str.append(this.nombre).append(": ");

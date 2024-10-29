@@ -1,12 +1,13 @@
 public class Condicion {
-    private String nomVariable1;
-    private String entrada1;
-    private String nomVariable2;
-    private String entrada2;
-    private String nomSalida;
-    private String salida;
+    private String nomVariable1; // Nombre de la variable del primer argumento
+    private String entrada1; // Valor de la variable del primer argumento
+    private String nomVariable2; // Nombre de la variable del segundo argumento
+    private String entrada2; // Valor de la variable del segundo argumento
+    private String nomSalida; // Nombre de la varibale de conclusion
+    private String salida; // Valor de la variable de concluison
     private String operador;
 
+    // Constructor
     public Condicion(String nomVariable1, String entrada1, String nomVariable2, String entraga2, String nomSalida, String salida, String operador) {
         this.nomVariable1 = nomVariable1;
         this.entrada1 = entrada1;
@@ -73,6 +74,7 @@ public class Condicion {
         this.operador = operador;
     }
 
+    // Funcion que tranforma la condicion a un string para poder ser imprimida
     public StringBuilder print() {
         StringBuilder str = new StringBuilder();
         str.append("if (").append(nomVariable1).append(" es ").append(entrada1).append(" ").append(operador).append(" ").append(nomVariable2).append(" es ").append(entrada2).append(") then ").append(nomSalida).append(nomSalida).append(" es ").append(salida);

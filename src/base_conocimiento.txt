@@ -1,2 +1,3 @@
-if (Temperatura es Fresco and Presion es Baja) then Combustible es PM
-if (Temperatura es Frio and Presion es Baja) then Combustible es PM
+if (Humedad es Media and Viento es Suave) then Ventilador es Medio
+if (Humedad es Media and Viento es Calma) then Ventilador es Bajo
+if (Humedad es Alta and Viento es Suave) then Ventilador es Medio
