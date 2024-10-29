@@ -83,6 +83,28 @@ public class ConjuntoDifuso {
         return valoresCalculados;
     }
 
+    public double getCentroide() {
+        if (parametros.size() == 3) { // Triangular
+            // En una función triangular, el centroide es el segundo parámetro (b)
+            return parametros.get(1);
+        } else if (parametros.size() == 4) { // Trapezoidal
+            // En una función trapezoidal, el centroide se calcula como el promedio ponderado de las áreas
+            double a = parametros.get(0), b = parametros.get(1), c = parametros.get(2), d = parametros.get(3);
+
+            // Altura del trapezoide en la zona de 1.0
+            double altura = 1.0;
+
+            // Área del trapezoide y centroide aproximado como promedio ponderado
+            double baseInferior = d - a;
+            double baseSuperior = c - b;
+            double area = 0.5 * (baseInferior + baseSuperior) * altura;
+            double centroide = (a + b + c + d) / 4.0; // Aproximación del centroide para un trapezoide
+
+            return centroide;
+        }
+        return 0.0; // Para conjuntos con otros tipos de forma (si existieran)
+    }
+
     public StringBuilder print() {
         StringBuilder str = new StringBuilder();
         str.append(this.nombre).append(": ");
